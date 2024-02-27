@@ -1,17 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbtsutygk3yog"]
+[gd_scene load_steps=6 format=3 uid="uid://cbtsutygk3yog"]
 
 [ext_resource type="Script" path="res://MeshInstance3D.gd" id="1_q2jni"]
+[ext_resource type="Script" path="res://Ground.gd" id="1_vccdi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2g0am"]
+size = Vector3(20, 1, 100)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_6c5nu"]
-size = Vector2(2, 10)
+size = Vector2(20, 100)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rtg08"]
 
-[node name="Ground" type="Node3D"]
+[node name="Ground" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.281)
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("1_vccdi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 0)
+shape = SubResource("BoxShape3D_2g0am")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, -40.7391)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh = SubResource("PlaneMesh_6c5nu")
 surface_material_override/0 = SubResource("StandardMaterial3D_rtg08")
 script = ExtResource("1_q2jni")
